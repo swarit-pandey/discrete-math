@@ -31,5 +31,5 @@ func NewSet() *Set {
 }
 
 func Sets(o *Options) {
-
+	fmt.Println("called the set function")
 }
