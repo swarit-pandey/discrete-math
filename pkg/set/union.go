@@ -44,7 +44,7 @@ func (s *Set) Union(file string, o *Options) error {
 
 	resultantSet := UnionMultiple(sets)
 
-	err = writeSetToFile(resultantSet, o)
+	err = writeSetToFile(resultantSet, o, "union")
 	if err != nil {
 		return err
 	}

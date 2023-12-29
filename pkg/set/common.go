@@ -63,12 +63,12 @@ func writeSetsToFile(sets []*Set, o *Options) error {
 	return encoder.Encode(jsonSets)
 }
 
-func writeSetToFile(set *Set, o *Options) error {
+func writeSetToFile(set *Set, o *Options, operation string) error {
 	fmt.Println("Writing set to a file... ")
 	jsonSet := make([]JSONSet, 1)
 
 	singleSet := JSONSet{
-		Name:     "Set generic",
+		Name:     fmt.Sprintf("Set %s", operation),
 		Elements: make([]interface{}, 0, len(set.Elements)),
 	}
 
