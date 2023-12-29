@@ -1,7 +1,7 @@
 package set
 
 // IntersectionPairwise performs pairwise union on two sets
-func IntersectionPairwise(set1, set2 *Set) *Set {
+func intersectionPairwise(set1, set2 *Set) *Set {
 	resultSet := NewSet()
 
 	// Go through the smaller set first
@@ -20,7 +20,7 @@ func IntersectionPairwise(set1, set2 *Set) *Set {
 }
 
 // IntersetctionMultiple will divide and conquer the sets and performs union pairwise
-func IntersectionMultiple(sets []*Set) *Set {
+func intersectionMultiple(sets []*Set) *Set {
 	if len(sets) == 0 {
 		return NewSet()
 	}
@@ -29,18 +29,18 @@ func IntersectionMultiple(sets []*Set) *Set {
 	}
 
 	mid := len(sets) / 2
-	leftInter := UnionMultiple(sets[:mid])
-	rightInter := UnionMultiple(sets[mid:])
-	return IntersectionPairwise(leftInter, rightInter)
+	leftInter := intersectionMultiple(sets[:mid])
+	rightInter := intersectionMultiple(sets[mid:])
+	return intersectionPairwise(leftInter, rightInter)
 }
 
 func (s *Set) Intersect(file string, o *Options) error {
-	sets, err := ReadSetsFromJSON(file)
+	sets, err := readSetsFromJSON(file)
 	if err != nil {
 		return err
 	}
 
-	resultantSet := IntersectionMultiple(sets)
+	resultantSet := intersectionMultiple(sets)
 
 	err = writeSetToFile(resultantSet, o, "intersection")
 	if err != nil {

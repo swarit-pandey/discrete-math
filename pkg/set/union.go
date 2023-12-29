@@ -7,7 +7,7 @@ package set
 // ensuring the correctness of the final union irrespective of the order in which individual unions are performed.
 
 // Union pairwise, take setA and setB, perform check take union
-func UnionPairwise(set1, set2 *Set) *Set {
+func unionPairwise(set1, set2 *Set) *Set {
 	resultSet := NewSet()
 	for element := range set1.Elements {
 		resultSet.Elements[element] = true
@@ -22,7 +22,7 @@ func UnionPairwise(set1, set2 *Set) *Set {
 }
 
 // Divide and conquer merge
-func UnionMultiple(sets []*Set) *Set {
+func unionMultiple(sets []*Set) *Set {
 	if len(sets) == 0 {
 		return NewSet()
 	}
@@ -31,18 +31,18 @@ func UnionMultiple(sets []*Set) *Set {
 	}
 
 	mid := len(sets) / 2
-	leftUnion := UnionMultiple(sets[:mid])
-	rightUnion := UnionMultiple(sets[mid:])
-	return UnionPairwise(leftUnion, rightUnion)
+	leftUnion := unionMultiple(sets[:mid])
+	rightUnion := unionMultiple(sets[mid:])
+	return unionPairwise(leftUnion, rightUnion)
 }
 
 func (s *Set) Union(file string, o *Options) error {
-	sets, err := ReadSetsFromJSON(file)
+	sets, err := readSetsFromJSON(file)
 	if err != nil {
 		return err
 	}
 
-	resultantSet := UnionMultiple(sets)
+	resultantSet := unionMultiple(sets)
 
 	err = writeSetToFile(resultantSet, o, "union")
 	if err != nil {

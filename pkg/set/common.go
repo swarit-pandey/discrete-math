@@ -9,7 +9,7 @@ import (
 
 // TODO: Refactor this shitty code
 
-func ReadSetsFromJSON(filename string) ([]*Set, error) {
+func readSetsFromJSON(filename string) ([]*Set, error) {
 	var jsonSets []JSONSet
 	bytes, err := os.ReadFile(filename)
 	if err != nil {
@@ -52,7 +52,14 @@ func writeSetsToFile(sets []*Set, o *Options) error {
 		jsonSets[i] = jsonSet
 	}
 
-	file, err := os.Create(o.OutputFile)
+	var outputFilePath string
+	if outputFilePath == "" {
+		outputFilePath = createDefaultOutputFile()
+	} else {
+		outputFilePath = o.OutputFile
+	}
+
+	file, err := os.Create(outputFilePath)
 	if err != nil {
 		return err
 	}

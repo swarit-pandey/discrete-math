@@ -74,11 +74,31 @@ var intersectCmd = &cobra.Command{
 	},
 }
 
+var powersetCmd = &cobra.Command{
+	Use:   "powerset",
+	Short: "Get powerset",
+	Long:  `Get powerset of the sets`,
+	Run: func(cmd *cobra.Command, args []string) {
+		var inputFilePath string
+		if options.InputFile == "" {
+			inputFilePath = "test_set1.json"
+		} else {
+			inputFilePath = options.InputFile
+		}
+
+		err := set.NewSet().Powerset(inputFilePath, &options)
+		if err != nil {
+			fmt.Println("error: ", err)
+		}
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(setCmd)
 	setCmd.AddCommand(generateCmd)
 	setCmd.AddCommand(unionCmd)
 	setCmd.AddCommand(intersectCmd)
+	setCmd.AddCommand(powersetCmd)
 
 	// Flags specific to the generate subcommand
 	generateCmd.Flags().IntVarP(&options.SetSize, "size", "", 10, "Size of each set")
