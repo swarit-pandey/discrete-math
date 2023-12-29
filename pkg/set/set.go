@@ -1,5 +1,7 @@
 package set
 
+import "fmt"
+
 type Set struct {
 	Multiset    bool                 // Multiset or not
 	Cardinality int                  // Cardinality of the set
@@ -13,6 +15,7 @@ type Options struct {
 	NumberOfSets    int    // Number of sets to generate
 	Randomize       bool   // Randomize the elements in the set
 	OutputFile      string // Output file to write the sets to
+	InputFile       string // Input file to write the sets to
 	Range           int    // Starting from zero to upper bound
 }
 
@@ -31,5 +34,5 @@ func NewSet() *Set {
 }
 
 func Sets(o *Options) {
-	fmt.Println("called the set function")
+	fmt.Println("this is some message")
 }
