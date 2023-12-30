@@ -34,8 +34,8 @@ func intersectionMultiple(sets []*Set) *Set {
 	return intersectionPairwise(leftInter, rightInter)
 }
 
-func (s *Set) Intersect(file string, o *Options) error {
-	sets, err := readSetsFromJSON(file)
+func (s *Set) Intersect(o *Options) error {
+	sets, err := readSetsFromJSON(o)
 	if err != nil {
 		return err
 	}

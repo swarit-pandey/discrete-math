@@ -2,6 +2,7 @@ package set
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"time"
@@ -9,9 +10,13 @@ import (
 
 // TODO: Refactor this shitty code
 
-func readSetsFromJSON(filename string) ([]*Set, error) {
+func readSetsFromJSON(o *Options) ([]*Set, error) {
+	if o.InputFile == "" {
+		return nil, errors.New("input file not given")
+	}
+
 	var jsonSets []JSONSet
-	bytes, err := os.ReadFile(filename)
+	bytes, err := os.ReadFile(o.InputFile)
 	if err != nil {
 		return nil, err
 	}
@@ -103,7 +108,7 @@ func writeSetToFile(set *Set, o *Options, operation string) error {
 }
 
 func createDefaultOutputFile() string {
-	timestamp := time.Now().Format("20060102-150405")
+	timestamp := time.Now().Format("2006-01-02-150405")
 
 	return fmt.Sprintf("sets-%s.json", timestamp)
 }

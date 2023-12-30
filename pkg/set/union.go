@@ -36,8 +36,8 @@ func unionMultiple(sets []*Set) *Set {
 	return unionPairwise(leftUnion, rightUnion)
 }
 
-func (s *Set) Union(file string, o *Options) error {
-	sets, err := readSetsFromJSON(file)
+func (s *Set) Union(o *Options) error {
+	sets, err := readSetsFromJSON(o)
 	if err != nil {
 		return err
 	}

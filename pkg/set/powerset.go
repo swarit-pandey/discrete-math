@@ -24,10 +24,10 @@ func generatePowerset(set *Set) []*Set {
 	return powerset
 }
 
-func (s *Set) Powerset(filepath string, o *Options) error {
+func (s *Set) Powerset(o *Options) error {
 	fmt.Println("Generating subsets...")
 
-	sets, err := readSetsFromJSON(filepath)
+	sets, err := readSetsFromJSON(o)
 	if err != nil {
 		return err
 	}

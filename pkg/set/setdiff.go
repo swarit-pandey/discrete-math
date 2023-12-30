@@ -1,5 +1,9 @@
 package set
 
+// Need to handle the case when there are more
+// than just two sets. Not adding it in the cmd
+// for now.
+
 func SetDiff(set1, set2 *Set) *Set {
 	differenceSet := NewSet()
 
