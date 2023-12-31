@@ -1,7 +1,5 @@
 package set
 
-import "fmt"
-
 type Set struct {
 	Multiset    bool                 // Multiset or not
 	Cardinality int                  // Cardinality of the set
@@ -31,8 +29,4 @@ func NewSet() *Set {
 		Universe:    nil,
 		Elements:    make(map[interface{}]bool),
 	}
-}
-
-func Sets(o *Options) {
-	fmt.Println("this is some message")
 }
